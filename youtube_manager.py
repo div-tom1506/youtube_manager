@@ -4,7 +4,6 @@ def load_data():
     try:
         with open('youtube.txt', 'r') as file:
             load_data = json.load(file)
-            print(load_data)
             return load_data
     except FileNotFoundError:                    # similar to catch
         return []
@@ -27,6 +26,7 @@ def add_video(videos):
     time = input("Enter video time: ")
     videos.append({"name": name, "time": time})
     save_data_helper(videos)
+    list_all_videos(videos)
 
 def update_video(videos):
     list_all_videos(videos)
@@ -45,6 +45,7 @@ def delete_video(videos):
     if 1 <= index <= len(videos):
         del videos[index-1]
         save_data_helper(videos)
+        print(f"Video number {index} removed successfully")
     else:
         print("Invalid index selected")
 
