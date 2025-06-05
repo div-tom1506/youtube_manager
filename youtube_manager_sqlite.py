@@ -14,8 +14,12 @@ cursor.execute('''
 
 def list_video():
     cursor.execute('SELECT * from videos')
-    for row in cursor.fetchall():
-        print(row)
+    rows = cursor.fetchall()
+    if not rows:
+        print("Videos not found")
+    else: 
+        for row in rows:
+            print(row)
 
 def add_video(name, time):
     cursor.execute('INSERT INTO videos(name, time) VALUES (?, ?)', (name, time))
@@ -25,10 +29,12 @@ def add_video(name, time):
 def update_video(video_id, new_name, new_time):
     cursor.execute('UPDATE videos SET name=?, time=? WHERE id=?', (new_name, new_time, video_id))
     conn.commit()
+    print("Video details updated successfully")
 
 def delete_video(video_id):
     cursor.execute('DELETE FROM videos WHERE id=?', (video_id))
     conn.commit()
+    print("Video deleted successfully")
 
 def main():
     
