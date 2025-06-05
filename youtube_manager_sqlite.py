@@ -14,7 +14,14 @@ cursor.execute('''
     )
 ''')
 
+def list_video():
+    cursor.execute('SELECT * from videos')
+    for row in cursor.fetchall():
+        print(row)
 
+def add_video(name, time):
+    cursor.execute('INSERT INTO videos(name, time) VALUES (?, ?)', (name, time))
+    conn.commit()
 
 def main():
     
@@ -29,9 +36,11 @@ def main():
 
         match choice:
             case "1": 
-                pass
+                list_video()
             case "2":
-                pass
+                name = input("Enter the video name: ")
+                time = input ("Enter the video time: ")
+                add_video(name, time) 
             case "3":
                 pass
             case "4":
