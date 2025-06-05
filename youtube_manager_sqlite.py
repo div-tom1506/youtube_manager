@@ -1,6 +1,4 @@
 # Storing data in sqlite3
-
-import json
 import sqlite3
 
 conn = sqlite3.connect("youtube_videos.db")
@@ -22,6 +20,15 @@ def list_video():
 def add_video(name, time):
     cursor.execute('INSERT INTO videos(name, time) VALUES (?, ?)', (name, time))
     conn.commit()
+    list_video()
+
+def update_video(video_id, new_name, new_time):
+    cursor.execute('UPDATE videos SET name=?, time=? WHERE id=?', (new_name, new_time, video_id))
+    conn.commit()
+
+def delete_video(video_id):
+    cursor.execute('DELETE FROM videos WHERE id=?', (video_id))
+    conn.commit()
 
 def main():
     
@@ -42,9 +49,15 @@ def main():
                 time = input ("Enter the video time: ")
                 add_video(name, time) 
             case "3":
-                pass
+                list_video()
+                video_id = input("Enter the video id: ")
+                name = input("Enter the video name: ")
+                time = input ("Enter the video time: ")
+                update_video(video_id, name, time) 
             case "4":
-                pass
+                list_video()
+                video_id = input("Enter the video id: ")
+                delete_video(video_id)
             case "5":
                 break
             case _:
