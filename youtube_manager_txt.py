@@ -1,3 +1,5 @@
+# Storing data in textfile
+
 import json
 
 def load_data():
@@ -5,7 +7,7 @@ def load_data():
         with open('youtube.txt', 'r') as file:
             load_data = json.load(file)
             return load_data
-    except FileNotFoundError:                    # similar to catch
+    except FileNotFoundError:
         return []
     
 def save_data_helper(videos):
