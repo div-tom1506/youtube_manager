@@ -8,7 +8,7 @@ cursor.execute('''
     CREATE TABLE IF NOT EXISTS videos(
                id INTEGER PRIMARY KEY,
                name TEXT NOT NULL,
-               time TEXT NOT NULL
+               duration TEXT NOT NULL
     )
 ''')
 
@@ -21,13 +21,13 @@ def list_video():
         for row in rows:
             print(row)
 
-def add_video(name, time):
-    cursor.execute('INSERT INTO videos(name, time) VALUES (?, ?)', (name, time))
+def add_video(name, duration):
+    cursor.execute('INSERT INTO videos(name, duration) VALUES (?, ?)', (name, duration))
     conn.commit()
     list_video()
 
-def update_video(video_id, new_name, new_time):
-    cursor.execute('UPDATE videos SET name=?, time=? WHERE id=?', (new_name, new_time, video_id))
+def update_video(video_id, new_name, new_duration):
+    cursor.execute('UPDATE videos SET name=?, duration=? WHERE id=?', (new_name, new_duration, video_id))
     conn.commit()
     print("Video details updated successfully")
 
@@ -52,14 +52,14 @@ def main():
                 list_video()
             case "2":
                 name = input("Enter the video name: ")
-                time = input ("Enter the video time: ")
-                add_video(name, time) 
+                duration = input ("Enter the video duration: ")
+                add_video(name, duration) 
             case "3":
                 list_video()
                 video_id = input("Enter the video id: ")
                 name = input("Enter the video name: ")
-                time = input ("Enter the video time: ")
-                update_video(video_id, name, time) 
+                duration = input ("Enter the video duration: ")
+                update_video(video_id, name, duration) 
             case "4":
                 list_video()
                 video_id = input("Enter the video id: ")
